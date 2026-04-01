@@ -1,0 +1,181 @@
+{
+  "theme": "light",
+  "archetype": "Archetype 1 (Organic & Earthy) - Scientific Variant",
+  "design_philosophy": "A professional, scientific, and highly credible B2B pharmaceutical manufacturing interface. The tone is authoritative yet natural, blending sterile precision (white, modern typography) with natural Ayurvedic roots (deep green, brown, saffron accents). Generous whitespace and 'Tetris/Bento' grid layouts are used to organize technical information efficiently without overwhelming the user.",
+  "colors": {
+    "primary_brand": {
+      "name": "Deep Green",
+      "tailwind": "emerald-900",
+      "hex": "#064e3b",
+      "usage": "Primary CTAs, Header Text, Footer Background, Hero Overlay"
+    },
+    "secondary_brand": {
+      "name": "Saffron",
+      "tailwind": "orange-600",
+      "hex": "#ea580c",
+      "usage": "Hover states, active links, notification badges, small overlines/labels, prominent accents"
+    },
+    "accent": {
+      "name": "Earthy Brown",
+      "tailwind": "amber-900",
+      "hex": "#78350f",
+      "usage": "Secondary buttons, subtle borders, typography accents in blog/about sections"
+    },
+    "background": {
+      "name": "Off White",
+      "tailwind": "stone-50",
+      "hex": "#fafaf9",
+      "usage": "Main page backgrounds to reduce eye strain compared to pure white"
+    },
+    "surface": {
+      "name": "Pure White",
+      "tailwind": "white",
+      "hex": "#ffffff",
+      "usage": "Card backgrounds, sticky header, overlapping sections"
+    },
+    "text": {
+      "heading": "emerald-950",
+      "body": "stone-600",
+      "muted": "stone-500",
+      "inverse": "white"
+    }
+  },
+  "typography": {
+    "setup_instructions": "Import Outfit and Manrope from Google Fonts.",
+    "fonts": {
+      "heading": "'Outfit', sans-serif",
+      "body": "'Manrope', sans-serif"
+    },
+    "scale": {
+      "h1": "text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-emerald-950",
+      "h2": "text-3xl md:text-4xl font-semibold tracking-tight text-emerald-900",
+      "h3": "text-xl md:text-2xl font-medium text-emerald-900",
+      "body": "text-base leading-relaxed text-stone-600",
+      "small": "text-sm text-stone-500",
+      "overline": "text-xs tracking-[0.2em] uppercase font-bold text-orange-600 mb-2 block"
+    }
+  },
+  "spacing_and_layout": {
+    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "section_padding": "py-20 lg:py-32",
+    "grid_bento": "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6",
+    "cards": "bg-white p-8 border border-stone-200 rounded-xl hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300",
+    "header": "fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-stone-200"
+  },
+  "interactive_elements": {
+    "button_primary": "inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-emerald-900 hover:bg-emerald-800 transition-colors shadow-sm",
+    "button_secondary": "inline-flex items-center justify-center px-6 py-3 border border-emerald-900 text-base font-medium rounded-md text-emerald-900 bg-transparent hover:bg-emerald-50 transition-colors",
+    "inputs": "w-full border-stone-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 sm:text-sm bg-white p-3 border",
+    "test_ids": "CRITICAL: All buttons, links, form inputs, and dynamic elements MUST include data-testid='descriptive-kebab-case'"
+  },
+  "media_assets": {
+    "logo": "https://customer-assets.emergentagent.com/job_hilton-pharma-chem/artifacts/yt9k64ms_Hilton%20Logo%20FINAL.png",
+    "images": {
+      "hero_bg": {
+        "url": "https://images.unsplash.com/photo-1754372069872-3fef8a815c87?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2OTV8MHwxfHNlYXJjaHwzfHxtb2Rlcm4lMjBwaGFybWFjZXV0aWNhbCUyMG1hbnVmYWN0dXJpbmd8ZW58MHx8fHwxNzc1MDUyODU5fDA&ixlib=rb-4.1.0&q=85",
+        "description": "Workers in a sterile manufacturing environment"
+      },
+      "about_facility": {
+        "url": "https://images.unsplash.com/photo-1745420052527-a75fcc6aba58?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2OTV8MHwxfHNlYXJjaHw0fHxtb2Rlcm4lMjBwaGFybWFjZXV0aWNhbCUyMG1hbnVmYWN0dXJpbmd8ZW58MHx8fHwxNzc1MDUyODU5fDA&ixlib=rb-4.1.0&q=85",
+        "description": "Automated production line bottle filling"
+      },
+      "category_capsules": {
+        "url": "https://images.pexels.com/photos/11589213/pexels-photo-11589213.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Gloved hands arranging capsules on sterile tray"
+      },
+      "category_powders": {
+        "url": "https://images.unsplash.com/photo-1633509907796-ece8a21bdbcb?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2OTV8MHwxfHNlYXJjaHw0fHxheXVydmVkaWMlMjBoZXJicyUyMHBvd2RlcnxlbnwwfHx8fDE3NzUwNTI4NjF8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Spoons filled with various ayurvedic powders"
+      },
+      "category_oils": {
+        "url": "https://images.pexels.com/photos/4021768/pexels-photo-4021768.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Macro shot of dropper and oil"
+      },
+      "blog_featured": {
+        "url": "https://images.pexels.com/photos/7615621/pexels-photo-7615621.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Herbal supplements and Ginkgo leaves"
+      }
+    }
+  },
+  "page_architecture": {
+    "navigation": {
+      "links": ["Home", "About Us", "Products", "Blog", "Contact"],
+      "cta": "Request Quote"
+    },
+    "home": [
+      {
+        "section": "Hero",
+        "content": "Headline: 'Trusted Partner for bringing Vision to Shelf.' Overlay black/40 on hero_bg image. CTA to Contact.",
+        "testid": "hero-section"
+      },
+      {
+        "section": "USPs (Bento Grid)",
+        "content": "Highlight: 25+ Years Legacy, 300+ Formulations, No Batch Variation, GMP & ISO Certified.",
+        "testid": "usps-section"
+      },
+      {
+        "section": "Product Categories",
+        "content": "Grid showing: Capsules & Tablets, Syrups & Liquids, Oils & Ointments, Churnas & Powders. Use provided category images.",
+        "testid": "products-grid"
+      },
+      {
+        "section": "About Teaser",
+        "content": "Text on left, about_facility image on right. Focus on Sidhpur plant and scale.",
+        "testid": "about-teaser"
+      }
+    ],
+    "about": [
+      {
+        "section": "Story & Legacy",
+        "content": "Details of the 25+ years journey. Corporate office in Ahmedabad, Plant in Sidhpur.",
+        "testid": "about-story"
+      },
+      {
+        "section": "Certifications & Quality",
+        "content": "Highlight GMP, ISO visually. Emphasize consistency.",
+        "testid": "certifications-section"
+      }
+    ],
+    "products": [
+      {
+        "section": "Product Catalog",
+        "content": "Detailed cards for all formulations. Highlight pain ointments, balms, and inhalers as Key USPs.",
+        "testid": "product-catalog"
+      }
+    ],
+    "blog": [
+      {
+        "section": "Insights",
+        "content": "Grid of articles on Ayurvedic manufacturing, contract manufacturing trends.",
+        "testid": "blog-grid"
+      }
+    ],
+    "contact": [
+      {
+        "section": "Inquiry Form",
+        "content": "Functional form (Name, Company, Email, Phone, Product Interest, Message).",
+        "testid": "contact-form"
+      },
+      {
+        "section": "Location Info",
+        "content": "Phone: 9328119224 | Email: info@hiltonpharmachem.com. Addresses for Plant and Corporate Office.",
+        "testid": "contact-info"
+      }
+    ],
+    "footer": {
+      "content": "Dark emerald-950 background. Quick links, contact details, certifications summary.",
+      "testid": "footer"
+    }
+  },
+  "instructions_to_main_agent": [
+    "INSTALL DEPENDENCIES: Install 'lucide-react' for icons and 'framer-motion' for scroll reveal animations.",
+    "ROUTING: Use 'react-router-dom' to create paths for /, /about, /products, /blog, /contact.",
+    "HERO CONTRAST: Ensure the hero text is fully legible by applying a 'bg-black/50' or 'bg-emerald-950/60' overlay on the hero image.",
+    "COMPONENTS: Build the UI using plain React + Tailwind CSS. Avoid complex external component libraries unless necessary. Custom components give more freedom.",
+    "TEST IDS: Add 'data-testid' to absolutely every interactive element (buttons, form fields, nav links) and major section wrappers.",
+    "FORMS: Ensure the contact form has 'onSubmit' handlers, validation, and realistic UI feedback (success state) mocking the submission.",
+    "FONTS: Add the Google Fonts link for 'Outfit' and 'Manrope' into the public/index.html head, or import in index.css.",
+    "DO NOT use generic placeholder images. Use ONLY the URLs provided in this JSON.",
+    "Ensure generous spacing between sections (e.g., py-24 or py-32) to match premium B2B quality."
+  ]
+}
