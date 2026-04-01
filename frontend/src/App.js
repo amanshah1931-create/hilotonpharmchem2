@@ -5,8 +5,10 @@ import Footer from "@/components/Footer";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Products from "@/pages/Products";
+import ProductCategory from "@/pages/ProductCategory";
 import Blog from "@/pages/Blog";
 import BlogPost from "@/pages/BlogPost";
+import BlogWrite from "@/pages/BlogWrite";
 import Contact from "@/pages/Contact";
 import ScrollToTop from "@/components/ScrollToTop";
 import { Toaster } from "sonner";
@@ -22,7 +24,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/products/:slug" element={<ProductCategory />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/write" element={<BlogWrite />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>

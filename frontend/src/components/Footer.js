@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin } from "lucide-react";
-
-const LOGO_URL = "https://customer-assets.emergentagent.com/job_hilton-pharma-chem/artifacts/yt9k64ms_Hilton%20Logo%20FINAL.png";
+import BrandLogo from "@/components/BrandLogo";
 
 export default function Footer() {
   return (
@@ -13,12 +12,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <img
-              src={LOGO_URL}
-              alt="Hilton Pharma Chem"
-              className="h-10 w-auto mb-4 brightness-0 invert"
-              data-testid="footer-logo"
-            />
+            <BrandLogo variant="white" className="mb-4" />
             <p className="text-emerald-200 text-sm leading-relaxed mt-4">
               Trusted Partner for bringing Vision to Shelf. GMP & ISO certified third-party
               Ayurvedic and pharmaceutical manufacturer with 25+ years of formulation expertise.

@@ -161,6 +161,38 @@ class HiltonPharmaChemAPITester:
         )
         return success
 
+    def test_create_blog_post(self):
+        """Test creating a new blog post"""
+        test_blog = {
+            "title": f"Test Blog Post {datetime.now().strftime('%H%M%S')}",
+            "slug": f"test-blog-post-{datetime.now().strftime('%H%M%S')}",
+            "excerpt": "This is a test blog post excerpt for API testing purposes.",
+            "content": "<h2>Test Content</h2><p>This is test content for the blog post.</p>",
+            "category": "Industry Insights",
+            "image_url": "https://images.pexels.com/photos/7615621/pexels-photo-7615621.jpeg",
+            "author": "Test Author"
+        }
+        
+        success, response = self.run_test(
+            "Create New Blog Post",
+            "POST",
+            "blogs",
+            200,
+            data=test_blog
+        )
+        
+        if success and isinstance(response, dict):
+            required_fields = ['id', 'title', 'slug', 'excerpt', 'content', 'author', 'created_at']
+            missing_fields = [field for field in required_fields if field not in response]
+            if missing_fields:
+                print(f"   ⚠️  Missing fields in blog response: {missing_fields}")
+            else:
+                print(f"   ✅ Blog post response structure is correct")
+                print(f"   Created blog ID: {response.get('id', 'N/A')}")
+                print(f"   Created blog slug: {response.get('slug', 'N/A')}")
+        
+        return success, response
+
 def main():
     print("🚀 Starting Hilton Pharma Chem API Tests")
     print("=" * 50)
@@ -188,6 +220,9 @@ def main():
     
     # Test validation
     tester.test_create_inquiry_missing_fields()
+    
+    # Test blog creation
+    blog_create_success, blog_create_data = tester.test_create_blog_post()
     
     # Print results
     print("\n" + "=" * 50)

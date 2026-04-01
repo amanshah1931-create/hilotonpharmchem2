@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const LOGO_URL = "https://customer-assets.emergentagent.com/job_hilton-pharma-chem/artifacts/yt9k64ms_Hilton%20Logo%20FINAL.png";
+import BrandLogo from "@/components/BrandLogo";
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -41,11 +40,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link to="/" data-testid="navbar-logo" className="flex-shrink-0">
-            <img
-              src={LOGO_URL}
-              alt="Hilton Pharma Chem"
-              className="h-10 lg:h-12 w-auto"
-            />
+            <BrandLogo variant="color" />
           </Link>
 
           {/* Desktop Nav */}

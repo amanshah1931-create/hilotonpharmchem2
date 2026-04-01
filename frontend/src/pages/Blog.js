@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Calendar, ArrowRight, User } from "lucide-react";
+import { Calendar, ArrowRight, User, PenLine } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import axios from "axios";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
@@ -27,20 +28,31 @@ export default function Blog() {
     <div data-testid="blog-page">
       {/* Page Header */}
       <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 bg-emerald-950">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <span className="text-xs tracking-[0.2em] uppercase font-bold text-orange-400 mb-4 block">
-            Insights & Knowledge
-          </span>
-          <h1
-            className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white"
-            style={{ fontFamily: "'Outfit', sans-serif" }}
-          >
-            Blog
-          </h1>
-          <p className="mt-4 text-lg text-emerald-200 max-w-2xl">
-            Industry insights, manufacturing best practices, and knowledge resources for
-            Ayurvedic and pharmaceutical brands.
-          </p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
+          <div>
+            <span className="text-xs tracking-[0.2em] uppercase font-bold text-orange-400 mb-4 block">
+              Insights & Knowledge
+            </span>
+            <h1
+              className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white"
+              style={{ fontFamily: "'Outfit', sans-serif" }}
+            >
+              Blog
+            </h1>
+            <p className="mt-4 text-lg text-emerald-200 max-w-2xl">
+              Industry insights, manufacturing best practices, and knowledge resources for
+              Ayurvedic and pharmaceutical brands.
+            </p>
+          </div>
+          <Link to="/blog/write">
+            <Button
+              data-testid="write-blog-btn"
+              className="bg-orange-600 hover:bg-orange-500 text-white px-6 py-2.5 rounded-full shadow-lg shadow-orange-600/30 flex-shrink-0"
+            >
+              <PenLine className="w-4 h-4 mr-2" />
+              Write a Post
+            </Button>
+          </Link>
         </div>
       </section>
 

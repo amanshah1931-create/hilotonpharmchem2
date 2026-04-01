@@ -11,24 +11,28 @@ const ABOUT_IMG = "https://images.unsplash.com/photo-1745420052527-a75fcc6aba58?
 
 const CATEGORIES = [
   {
-    title: "Capsules & Tablets",
-    desc: "Standardized Ayurvedic and nutraceutical formulations with precise dosing and consistent bioavailability.",
-    image: "https://images.pexels.com/photos/11589213/pexels-photo-11589213.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-  },
-  {
-    title: "Syrups & Liquids",
-    desc: "Herbal syrups and liquid formulations manufactured under controlled conditions for stability and efficacy.",
-    image: "https://images.pexels.com/photos/10022079/pexels-photo-10022079.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-  },
-  {
-    title: "Oils & Ointments",
-    desc: "Pain relief ointments, therapeutic oils, and balms crafted with our signature no batch-to-batch variation process.",
+    title: "Ointments & Creams",
+    slug: "ointments-creams-gels",
+    desc: "Pain relief ointments, therapeutic creams, medicated gels, and oral care products.",
     image: "https://images.pexels.com/photos/4021768/pexels-photo-4021768.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   },
   {
-    title: "Churnas & Powders",
-    desc: "Traditional Ayurvedic churna and powder formulations processed to maintain herb potency and shelf stability.",
-    image: "https://images.unsplash.com/photo-1633509907796-ece8a21bdbcb?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2OTV8MHwxfHNlYXJjaHw0fHxheXVydmVkaWMlMjBoZXJicyUyMHBvd2RlcnxlbnwwfHx8fDE3NzUwNTI4NjF8MA&ixlib=rb-4.1.0&q=85",
+    title: "Syrups & Liquids",
+    slug: "syrups-liquids",
+    desc: "Ayurvedic syrups, health tonics, herbal juices, and pediatric liquid formulations.",
+    image: "https://images.pexels.com/photos/10022079/pexels-photo-10022079.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+  },
+  {
+    title: "Oils",
+    slug: "oils",
+    desc: "Pain relief oils, therapeutic massage oils, hair care oils, and cold-pressed single-herb oils.",
+    image: "https://images.unsplash.com/photo-1635166304271-04931640a450?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MjJ8MHwxfHNlYXJjaHwxfHxheXVydmVkaWMlMjBoZXJiYWwlMjBzeXJ1cCUyMGJvdHRsZXN8ZW58MHx8fHwxNzc1MDUyOTU0fDA&ixlib=rb-4.1.0&q=85",
+  },
+  {
+    title: "Tablets & Capsules",
+    slug: "tablets-capsules",
+    desc: "Ayurvedic tablets, herbal capsules, and standardized single-herb supplements.",
+    image: "https://images.pexels.com/photos/11589213/pexels-photo-11589213.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   },
 ];
 
@@ -212,7 +216,7 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {CATEGORIES.map((cat) => (
               <Link
-                to="/products"
+                to={`/products/${cat.slug}`}
                 key={cat.title}
                 data-testid={`category-card-${cat.title.toLowerCase().replace(/\s+/g, "-")}`}
                 className="group bg-white rounded-2xl overflow-hidden border border-stone-200 card-hover"
