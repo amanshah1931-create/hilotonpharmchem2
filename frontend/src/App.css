@@ -26,16 +26,39 @@
 
 /* Smooth hover for cards */
 .card-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
 }
 
 /* Hero overlay */
 .hero-overlay {
-  background: linear-gradient(to right, rgba(6, 78, 59, 0.85) 0%, rgba(6, 78, 59, 0.5) 60%, transparent 100%);
+  background: linear-gradient(135deg, rgba(6, 78, 59, 0.92) 0%, rgba(6, 78, 59, 0.6) 50%, rgba(6, 78, 59, 0.3) 100%);
+}
+
+/* Hero floating badges */
+@keyframes floatBadge {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.hero-float-badge {
+  animation: floatBadge 4s ease-in-out infinite;
+}
+.hero-float-badge:nth-child(2) {
+  animation-delay: 1.2s;
+}
+.hero-float-badge:nth-child(3) {
+  animation-delay: 2.4s;
+}
+
+/* Direction utilities for process */
+.direction-rtl {
+  direction: rtl;
+}
+.direction-ltr {
+  direction: ltr;
 }
 
 /* Blog content styles */
@@ -73,4 +96,12 @@
   opacity: 0.03;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   pointer-events: none;
+}
+
+/* Line clamp for blog excerpts */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
