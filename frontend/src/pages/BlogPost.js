@@ -50,7 +50,7 @@ export default function BlogPost() {
         <Link
           to="/blog"
           data-testid="blog-back-link"
-          className="inline-flex items-center gap-2 mt-6 text-emerald-900 hover:text-orange-600 font-medium"
+          className="inline-flex items-center gap-2 mt-6 text-emerald-900 hover:text-[#d4a017] font-medium"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Blog
@@ -73,7 +73,7 @@ export default function BlogPost() {
             Back to Blog
           </Link>
           {post.category && (
-            <span className="text-xs tracking-[0.15em] uppercase font-bold text-orange-600 mb-3 block">
+            <span className="text-xs tracking-[0.15em] uppercase font-bold text-[#d4a017] mb-3 block">
               {post.category}
             </span>
           )}
@@ -128,7 +128,7 @@ export default function BlogPost() {
           <Link
             to="/contact"
             data-testid="blog-post-contact-link"
-            className="inline-flex items-center gap-2 mt-4 text-emerald-900 hover:text-orange-600 font-medium transition-colors"
+            className="inline-flex items-center gap-2 mt-4 text-emerald-900 hover:text-[#d4a017] font-medium transition-colors"
           >
             Get in Touch
             <span className="text-sm">→</span>

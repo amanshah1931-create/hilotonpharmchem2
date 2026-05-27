@@ -133,7 +133,7 @@ export default function BlogWrite() {
                 onChange={handleChange}
                 data-testid="blog-title-input"
                 placeholder="Enter your blog post title"
-                className="text-lg border-stone-300 focus:ring-orange-500 focus:border-orange-500"
+                className="text-lg border-stone-300 focus:ring-[#d4a017] focus:border-[#d4a017]"
                 required
               />
               {formData.slug && (
@@ -222,7 +222,7 @@ export default function BlogWrite() {
                   type="button"
                   onClick={() => setPreview(!preview)}
                   data-testid="blog-preview-toggle"
-                  className="relative z-10 inline-flex items-center gap-1.5 text-xs font-medium text-emerald-700 hover:text-orange-600 transition-colors px-2 py-1 rounded-md hover:bg-stone-100"
+                  className="relative z-10 inline-flex items-center gap-1.5 text-xs font-medium text-emerald-700 hover:text-[#d4a017] transition-colors px-2 py-1 rounded-md hover:bg-stone-100"
                 >
                   {preview ? <Pencil className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
                   {preview ? "Edit" : "Preview"}

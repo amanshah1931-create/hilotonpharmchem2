@@ -2,6 +2,7 @@ import "@/App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Products from "@/pages/Products";
@@ -17,7 +18,7 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <div className="flex flex-col min-h-screen bg-stone-50">
+      <div className="flex flex-col min-h-screen" style={{ background: "#f9fafb" }}>
         <Navbar />
         <main className="flex-1">
           <Routes>
@@ -32,6 +33,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        <WhatsAppButton />
       </div>
       <Toaster position="top-right" />
     </BrowserRouter>

@@ -38,7 +38,7 @@ export default function About() {
           <div className="absolute inset-0 bg-emerald-950/80" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <span className="text-xs tracking-[0.2em] uppercase font-bold text-orange-400 mb-4 block">
+          <span className="text-xs tracking-[0.2em] uppercase font-bold text-[#d4a017] mb-4 block">
             Our Story
           </span>
           <h1
@@ -59,7 +59,7 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <span className="text-xs tracking-[0.2em] uppercase font-bold text-orange-600 mb-4 block">
+              <span className="text-xs tracking-[0.2em] uppercase font-bold text-[#d4a017] mb-4 block">
                 Our Foundation
               </span>
               <h2
@@ -101,7 +101,7 @@ export default function About() {
       <section className="py-20 lg:py-28 bg-stone-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <span className="text-xs tracking-[0.2em] uppercase font-bold text-orange-600 mb-2 block">
+            <span className="text-xs tracking-[0.2em] uppercase font-bold text-[#d4a017] mb-2 block">
               How We Work
             </span>
             <h2
@@ -157,7 +157,7 @@ export default function About() {
       <section className="py-20 lg:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <span className="text-xs tracking-[0.2em] uppercase font-bold text-orange-600 mb-2 block">
+            <span className="text-xs tracking-[0.2em] uppercase font-bold text-[#d4a017] mb-2 block">
               Our Values
             </span>
             <h2
@@ -195,54 +195,39 @@ export default function About() {
       </section>
 
       {/* Certifications */}
-      <section data-testid="certifications-section" className="py-20 lg:py-28 bg-emerald-950 relative grain-overlay">
+      <section data-testid="certifications-section" className="py-20 lg:py-28 relative grain-overlay" style={{ background: "#022c22" }}>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <span className="text-xs tracking-[0.2em] uppercase font-bold text-orange-400 mb-4 block">
-                Certifications
-              </span>
-              <h2
-                className="text-3xl md:text-4xl font-semibold tracking-tight text-white"
-                style={{ fontFamily: "'Outfit', sans-serif" }}
-              >
+              <span className="text-xs tracking-[0.2em] uppercase font-bold text-[#d4a017] mb-4 block">Certifications</span>
+              <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-white">
                 GMP & ISO Certified Manufacturing Facility
               </h2>
-              <p className="mt-6 text-base text-emerald-200 leading-relaxed">
+              <p className="mt-6 text-base text-emerald-200/70 leading-relaxed">
                 Our manufacturing plant in Sidhpur, Patan, Gujarat operates under stringent quality
-                management systems. Every process, from raw material intake to finished product dispatch,
-                is documented and controlled to meet national and international regulatory standards.
+                management systems. Every process is documented and controlled to meet national and international standards.
               </p>
               <ul className="mt-8 space-y-4">
-                {[
-                  "Good Manufacturing Practice (GMP) compliance",
-                  "ISO certified quality management system",
-                  "CDSCO regulatory standards adherence",
-                  "Comprehensive batch documentation and audit trails",
-                  "Environmental monitoring and contamination control",
-                ].map((item) => (
+                {["Good Manufacturing Practice (GMP) compliance", "ISO certified quality management system", "CDSCO regulatory standards adherence", "Comprehensive batch documentation and audit trails", "Environmental monitoring and contamination control"].map((item) => (
                   <li key={item} className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-emerald-100 text-sm">{item}</span>
+                    <CheckCircle className="w-5 h-5 text-[#d4a017] mt-0.5 flex-shrink-0" />
+                    <span className="text-emerald-100/80 text-sm">{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="flex justify-center gap-8">
-              <div className="bg-emerald-900/50 backdrop-blur border border-emerald-700 rounded-2xl p-10 text-center">
-                <Shield className="w-16 h-16 text-orange-500 mx-auto mb-4" />
-                <div className="text-2xl font-bold text-white" style={{ fontFamily: "'Outfit', sans-serif" }}>
-                  GMP
+            <div className="flex justify-center gap-6 lg:gap-8">
+              {[
+                { icon: Shield, label: "GMP", sub: "Good Manufacturing\nPractice" },
+                { icon: Award, label: "ISO", sub: "Quality Management\nSystem" },
+                { icon: Award, label: "AYUSH", sub: "Ministry\nApproved" },
+              ].map((cert) => (
+                <div key={cert.label} className="glow-badge bg-[#064e3b]/50 backdrop-blur border border-emerald-700/50 rounded-2xl p-8 text-center">
+                  <cert.icon className="w-14 h-14 text-[#d4a017] mx-auto mb-3" />
+                  <div className="text-xl font-bold text-white">{cert.label}</div>
+                  <p className="mt-2 text-xs text-emerald-300/70 whitespace-pre-line">{cert.sub}</p>
                 </div>
-                <p className="mt-2 text-sm text-emerald-300">Good Manufacturing<br/>Practice</p>
-              </div>
-              <div className="bg-emerald-900/50 backdrop-blur border border-emerald-700 rounded-2xl p-10 text-center">
-                <Award className="w-16 h-16 text-orange-500 mx-auto mb-4" />
-                <div className="text-2xl font-bold text-white" style={{ fontFamily: "'Outfit', sans-serif" }}>
-                  ISO
-                </div>
-                <p className="mt-2 text-sm text-emerald-300">Quality Management<br/>System</p>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -252,7 +237,7 @@ export default function About() {
       <section className="py-20 lg:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <span className="text-xs tracking-[0.2em] uppercase font-bold text-orange-600 mb-2 block">
+            <span className="text-xs tracking-[0.2em] uppercase font-bold text-[#d4a017] mb-2 block">
               Our Locations
             </span>
             <h2

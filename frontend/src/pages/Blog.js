@@ -30,28 +30,28 @@ export default function Blog() {
       <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 bg-emerald-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
           <div>
-            <span className="text-xs tracking-[0.2em] uppercase font-bold text-orange-400 mb-4 block">
+            <span className="text-xs tracking-[0.2em] uppercase font-bold text-[#d4a017] mb-4 block font-['DM_Sans']">
               Insights & Knowledge
             </span>
             <h1
               className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white"
-              style={{ fontFamily: "'Outfit', sans-serif" }}
+              style={{ fontFamily: "'Playfair Display', serif" }}
             >
               Blog
             </h1>
-            <p className="mt-4 text-lg text-emerald-200 max-w-2xl">
+            <p className="mt-4 text-lg text-emerald-200/70 max-w-2xl font-['DM_Sans']">
               Industry insights, manufacturing best practices, and knowledge resources for
               Ayurvedic and pharmaceutical brands.
             </p>
           </div>
           <Link to="/blog/write">
-            <Button
+            <button
               data-testid="write-blog-btn"
-              className="bg-orange-600 hover:bg-orange-500 text-white px-6 py-2.5 rounded-full shadow-lg shadow-orange-600/30 flex-shrink-0"
+              className="btn-gold text-sm flex-shrink-0"
             >
-              <PenLine className="w-4 h-4 mr-2" />
+              <PenLine className="w-4 h-4" />
               Write a Post
-            </Button>
+            </button>
           </Link>
         </div>
       </section>
@@ -98,12 +98,12 @@ export default function Blog() {
                     </div>
                     <div className="p-6 lg:p-8 flex flex-col justify-center">
                       {post.category && (
-                        <span className="text-xs tracking-[0.15em] uppercase font-bold text-orange-600 mb-3">
+                        <span className="text-xs tracking-[0.15em] uppercase font-bold text-[#d4a017] mb-3">
                           {post.category}
                         </span>
                       )}
                       <h2
-                        className={`font-semibold tracking-tight text-emerald-900 group-hover:text-orange-600 transition-colors ${
+                        className={`font-semibold tracking-tight text-emerald-900 group-hover:text-[#d4a017] transition-colors ${
                           idx === 0 ? "text-2xl md:text-3xl" : "text-xl"
                         }`}
                         style={{ fontFamily: "'Outfit', sans-serif" }}
@@ -127,7 +127,7 @@ export default function Blog() {
                           })}
                         </span>
                       </div>
-                      <div className="mt-4 flex items-center gap-1 text-sm font-medium text-emerald-900 group-hover:text-orange-600 transition-colors">
+                      <div className="mt-4 flex items-center gap-1 text-sm font-medium text-emerald-900 group-hover:text-[#d4a017] transition-colors">
                         Read Article
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </div>

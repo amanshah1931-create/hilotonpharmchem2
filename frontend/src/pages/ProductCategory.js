@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, CheckCircle, Shield, FlaskConical } from "lucide-react";
 import PRODUCT_CATEGORIES from "@/data/productData";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default function ProductCategory() {
   const { slug } = useParams();
@@ -13,7 +14,7 @@ export default function ProductCategory() {
         <h1 className="text-2xl font-semibold text-emerald-900" style={{ fontFamily: "'Outfit', sans-serif" }}>
           Category Not Found
         </h1>
-        <Link to="/products" className="inline-flex items-center gap-2 mt-6 text-emerald-900 hover:text-orange-600 font-medium">
+        <Link to="/products" className="inline-flex items-center gap-2 mt-6 text-emerald-900 hover:text-[#d4a017] font-medium">
           <ArrowLeft className="w-4 h-4" /> Back to Products
         </Link>
       </div>
@@ -36,7 +37,7 @@ export default function ProductCategory() {
           >
             <ArrowLeft className="w-4 h-4" /> All Products
           </Link>
-          <span className="text-xs tracking-[0.2em] uppercase font-bold text-orange-400 mb-4 block">
+          <span className="text-xs tracking-[0.2em] uppercase font-bold text-[#d4a017] mb-4 block">
             Product Category
           </span>
           <h1
@@ -56,7 +57,7 @@ export default function ProductCategory() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
             <div className="lg:col-span-2">
-              <span className="text-xs tracking-[0.2em] uppercase font-bold text-orange-600 mb-3 block">
+              <span className="text-xs tracking-[0.2em] uppercase font-bold text-[#d4a017] mb-3 block">
                 Our Advantage
               </span>
               <h2
@@ -74,9 +75,9 @@ export default function ProductCategory() {
                   <Shield className="w-4 h-4 text-emerald-700" />
                   <span className="text-xs font-semibold text-emerald-800">GMP Certified</span>
                 </div>
-                <div className="flex items-center gap-2 bg-orange-50 px-3 py-1.5 rounded-lg">
-                  <FlaskConical className="w-4 h-4 text-orange-600" />
-                  <span className="text-xs font-semibold text-orange-700">300+ Formulations</span>
+                <div className="flex items-center gap-2 bg-[#d4a017]/5 px-3 py-1.5 rounded-lg">
+                  <FlaskConical className="w-4 h-4 text-[#d4a017]" />
+                  <span className="text-xs font-semibold text-[#d4a017]">300+ Formulations</span>
                 </div>
               </div>
             </div>
@@ -100,7 +101,7 @@ export default function ProductCategory() {
       <section className="py-16 lg:py-24 bg-stone-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <span className="text-xs tracking-[0.2em] uppercase font-bold text-orange-600 mb-3 block">
+            <span className="text-xs tracking-[0.2em] uppercase font-bold text-[#d4a017] mb-3 block">
               Full Product Range
             </span>
             <h2
@@ -119,23 +120,21 @@ export default function ProductCategory() {
               <div
                 key={product.name}
                 data-testid={`product-item-${idx}`}
-                className="group bg-white rounded-xl border border-stone-200 p-6 card-hover relative overflow-hidden"
+                className="group card-premium p-6 relative"
               >
-                {/* Accent corner */}
-                <div className="absolute top-0 right-0 w-16 h-16 bg-emerald-50 rounded-bl-[2rem] -mr-1 -mt-1 group-hover:w-20 group-hover:h-20 transition-all duration-300" />
                 <div className="relative z-10">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-900/10 flex items-center justify-center mb-4">
-                    <CheckCircle className="w-5 h-5 text-emerald-700" />
+                  <div className="w-10 h-10 rounded-xl bg-[#064e3b]/10 flex items-center justify-center mb-4">
+                    <CheckCircle className="w-5 h-5 text-[#064e3b]" />
                   </div>
-                  <h3
-                    className="text-base font-semibold text-emerald-900 group-hover:text-orange-600 transition-colors"
-                    style={{ fontFamily: "'Outfit', sans-serif" }}
-                  >
+                  <h3 className="text-base font-semibold text-[#064e3b] group-hover:text-[#d4a017] transition-colors">
                     {product.name}
                   </h3>
-                  <p className="mt-2 text-sm text-stone-500 leading-relaxed">
+                  <p className="mt-2 text-sm text-gray-500 leading-relaxed font-['DM_Sans']">
                     {product.desc}
                   </p>
+                  <Link to="/contact" className="product-card-overlay absolute inset-0 bg-[#064e3b]/90 rounded-xl flex items-center justify-center z-20">
+                    <span className="btn-gold text-sm">Request This Product</span>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -158,10 +157,10 @@ export default function ProductCategory() {
                 key={c.slug}
                 to={`/products/${c.slug}`}
                 data-testid={`related-category-${c.slug}`}
-                className="group bg-stone-50 border border-stone-200 rounded-xl p-4 text-center hover:border-orange-300 hover:bg-orange-50 transition-all"
+                className="group bg-stone-50 border border-stone-200 rounded-xl p-4 text-center hover:border-orange-300 hover:bg-[#d4a017]/5 transition-all"
               >
                 <img src={c.image} alt={c.shortTitle} className="w-full aspect-[4/3] object-cover rounded-lg mb-3" />
-                <span className="text-xs font-semibold text-emerald-900 group-hover:text-orange-600 transition-colors">
+                <span className="text-xs font-semibold text-emerald-900 group-hover:text-[#d4a017] transition-colors">
                   {c.shortTitle}
                 </span>
               </Link>
@@ -186,7 +185,7 @@ export default function ProductCategory() {
             <Link to="/contact">
               <Button
                 data-testid="category-cta-btn"
-                className="bg-orange-600 hover:bg-orange-500 text-white px-8 py-3 rounded-full shadow-lg shadow-orange-600/30"
+                className="bg-orange-600 hover:bg-[#d4a017]/50 text-white px-8 py-3 rounded-full shadow-lg shadow-orange-600/30"
               >
                 Request a Quote <ArrowRight className="ml-2 w-4 h-4" />
               </Button>

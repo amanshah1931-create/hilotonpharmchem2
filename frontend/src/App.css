@@ -1,94 +1,171 @@
-/* Hilton Pharma Chem - Custom Styles */
+/* ============================================
+   HILTON PHARMA CHEM — GLOBAL STYLES
+   ============================================ */
 
-/* Fade-in animation */
+/* --- ANIMATIONS --- */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes subtlePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 160, 23, 0.35); }
+  50% { box-shadow: 0 0 0 10px rgba(212, 160, 23, 0); }
+}
+@keyframes glowRing {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212,160,23,0.3), 0 0 20px rgba(6,78,59,0.1); }
+  50% { box-shadow: 0 0 0 8px rgba(212,160,23,0), 0 0 30px rgba(6,78,59,0.15); }
+}
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes bounceIn {
+  0% { transform: scale(0) translateY(20px); opacity: 0; }
+  60% { transform: scale(1.1) translateY(-4px); opacity: 1; }
+  100% { transform: scale(1) translateY(0); }
+}
+@keyframes whatsappBounce {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.15); }
+  30% { transform: scale(1); }
 }
 
 .animate-fade-in-up {
   animation: fadeInUp 0.7s ease-out forwards;
   opacity: 0;
 }
-
 .animate-delay-100 { animation-delay: 0.1s; }
 .animate-delay-200 { animation-delay: 0.2s; }
 .animate-delay-300 { animation-delay: 0.3s; }
 .animate-delay-400 { animation-delay: 0.4s; }
 .animate-delay-500 { animation-delay: 0.5s; }
-.animate-delay-600 { animation-delay: 0.6s; }
 
-/* Smooth hover for cards */
-.card-hover {
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.card-hover:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
-}
+/* --- SCROLL REVEAL --- */
+.sr-hidden { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.sr-visible { opacity: 1; transform: translateY(0); }
 
-/* Hero overlay */
+/* --- HERO --- */
 .hero-overlay {
-  background: linear-gradient(135deg, rgba(6, 78, 59, 0.92) 0%, rgba(6, 78, 59, 0.6) 50%, rgba(6, 78, 59, 0.3) 100%);
+  background: linear-gradient(135deg, rgba(2,44,34,0.92) 0%, rgba(6,78,59,0.65) 50%, rgba(6,78,59,0.3) 100%);
 }
-
-/* Hero floating badges */
 @keyframes floatBadge {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
 }
-.hero-float-badge {
-  animation: floatBadge 4s ease-in-out infinite;
+.hero-float-badge { animation: floatBadge 4s ease-in-out infinite; }
+.hero-float-badge:nth-child(2) { animation-delay: 1.3s; }
+.hero-float-badge:nth-child(3) { animation-delay: 2.6s; }
+
+/* --- CARDS --- */
+.card-premium {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
-.hero-float-badge:nth-child(2) {
-  animation-delay: 1.2s;
+.card-premium::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: var(--gold);
+  border-radius: 12px 0 0 12px;
+  transition: width 0.3s ease;
 }
-.hero-float-badge:nth-child(3) {
-  animation-delay: 2.4s;
+.card-premium:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  border-color: rgba(212,160,23,0.3);
+}
+.card-premium:hover::before { width: 4px; }
+
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
 }
 
-/* Direction utilities for process */
-.direction-rtl {
-  direction: rtl;
-}
-.direction-ltr {
-  direction: ltr;
-}
-
-/* Blog content styles */
-.blog-content h2 {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.5rem;
+/* --- BUTTONS --- */
+.btn-primary {
+  background: linear-gradient(135deg, #064e3b 0%, #0a7c5f 100%);
+  color: #fff;
+  border: 1px solid transparent;
+  padding: 12px 28px;
+  border-radius: 9999px;
   font-weight: 600;
-  color: #064e3b;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(6,78,59,0.25);
 }
-.blog-content h3 {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: #064e3b;
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
+.btn-primary:hover {
+  border-color: var(--gold);
+  box-shadow: 0 4px 20px rgba(212,160,23,0.3), 0 4px 14px rgba(6,78,59,0.2);
+  transform: translateY(-1px);
 }
-.blog-content p {
-  margin-bottom: 1rem;
-  line-height: 1.75;
-  color: #57534e;
-}
-.blog-content strong {
-  color: #1c1917;
+.btn-gold {
+  background: var(--gold);
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 9999px;
   font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(212,160,23,0.3);
+  animation: subtlePulse 3s infinite;
+}
+.btn-gold:hover {
+  background: var(--gold-dark);
+  box-shadow: 0 6px 24px rgba(212,160,23,0.4);
+  transform: translateY(-1px);
 }
 
-/* Grain texture overlay */
+/* --- GLASSMORPHISM NAVBAR --- */
+.navbar-glass {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(229,231,235,0.6);
+}
+.navbar-glass-scrolled {
+  background: rgba(255,255,255,0.92);
+  box-shadow: 0 1px 12px rgba(0,0,0,0.06);
+}
+
+/* --- LOGO --- */
+.logo-brand-green {
+  filter: hue-rotate(42deg) saturate(0.85) brightness(0.95);
+}
+.logo-brand-white {
+  filter: grayscale(1) brightness(5) contrast(2);
+}
+
+/* --- BLOG CONTENT --- */
+.blog-content h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 600; color: #064e3b; margin-top: 2rem; margin-bottom: 1rem; }
+.blog-content h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 500; color: #064e3b; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+.blog-content p { margin-bottom: 1rem; line-height: 1.8; color: #374151; }
+.blog-content strong { color: var(--text-dark); font-weight: 600; }
+
+/* --- GRAIN TEXTURE --- */
 .grain-overlay::after {
   content: '';
   position: absolute;
@@ -98,20 +175,40 @@
   pointer-events: none;
 }
 
-/* Logo brand color filter - converts black/red to green/saffron */
-.logo-brand-green {
-  filter: sepia(1) saturate(3) hue-rotate(100deg) brightness(0.45);
+/* --- LINE CLAMP --- */
+.line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* --- DIRECTION --- */
+.direction-rtl { direction: rtl; }
+.direction-ltr { direction: ltr; }
+
+/* --- GLOW BADGE --- */
+.glow-badge { animation: glowRing 3s ease-in-out infinite; }
+
+/* --- WHATSAPP BUTTON --- */
+.whatsapp-float {
+  animation: whatsappBounce 3s ease-in-out infinite;
 }
 
-/* Logo white variant for dark backgrounds */
-.logo-brand-white {
-  filter: grayscale(1) brightness(5) contrast(2);
+/* --- PRODUCT HOVER OVERLAY --- */
+.product-card-overlay {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.group:hover .product-card-overlay {
+  opacity: 1;
 }
 
-/* Line clamp for blog excerpts */
-.line-clamp-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+/* --- REDUCED MOTION --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .sr-hidden { opacity: 1; transform: none; }
+  .hero-float-badge { animation: none; }
+  .whatsapp-float { animation: none; }
+  .glow-badge { animation: none; }
+  .btn-gold { animation: none; }
 }
