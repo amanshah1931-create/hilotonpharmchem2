@@ -98,6 +98,16 @@
   pointer-events: none;
 }
 
+/* Logo brand color filter - converts black/red to green/saffron */
+.logo-brand-green {
+  filter: sepia(1) saturate(3) hue-rotate(100deg) brightness(0.45);
+}
+
+/* Logo white variant for dark backgrounds */
+.logo-brand-white {
+  filter: grayscale(1) brightness(5) contrast(2);
+}
+
 /* Line clamp for blog excerpts */
 .line-clamp-3 {
   display: -webkit-box;
