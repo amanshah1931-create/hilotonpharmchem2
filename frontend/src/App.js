@@ -11,6 +11,7 @@ import Blog from "@/pages/Blog";
 import BlogPost from "@/pages/BlogPost";
 import BlogWrite from "@/pages/BlogWrite";
 import Contact from "@/pages/Contact";
+import Admin from "@/pages/Admin";
 import ScrollToTop from "@/components/ScrollToTop";
 import { Toaster } from "sonner";
 
@@ -30,6 +31,7 @@ function App() {
             <Route path="/blog/write" element={<BlogWrite />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
         </main>
         <Footer />

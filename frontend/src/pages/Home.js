@@ -1,9 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import {
   Shield, FlaskConical, Users, Factory, ArrowRight, CheckCircle,
   MessageSquare, ClipboardList, IndianRupee, ThumbsUp, Package,
-  Palette, Settings, SearchCheck, Truck, FileCheck
+  Palette, Settings, SearchCheck, Truck, FileCheck,
+  Repeat, Beaker, TrendingUp, Rocket, ChevronLeft, ChevronRight
 } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import AnimatedCounter from "@/components/AnimatedCounter";
@@ -47,6 +48,92 @@ const WaveDivider = ({ color = "#ffffff", flip = false }) => (
     </svg>
   </div>
 );
+
+const MFG_USPS = [
+  { icon: Repeat, title: "No Batch-to-Batch Variation", desc: "Our standardized processes and rigorous quality control ensure every production batch delivers identical quality, potency, and physical characteristics across all dosage forms." },
+  { icon: Beaker, title: "Custom Formulation Development", desc: "We collaborate closely with brand partners to develop tailored formulations that meet specific therapeutic objectives, market requirements, and regulatory standards." },
+  { icon: TrendingUp, title: "Scalable Production", desc: "From pilot batches to full-scale production, our GMP-certified facility supports flexible volume requirements for startups, mid-size brands, and large enterprises." },
+  { icon: Rocket, title: "Low MOQ for Startups", desc: "We support new businesses with low minimum order quantities, enabling startups and emerging brands to launch their product lines without heavy upfront inventory investment." },
+];
+
+function MfgCarousel() {
+  const [current, setCurrent] = useState(0);
+  const total = MFG_USPS.length;
+  const timerRef = useRef(null);
+
+  const next = useCallback(() => setCurrent((p) => (p + 1) % total), [total]);
+  const prev = useCallback(() => setCurrent((p) => (p - 1 + total) % total), [total]);
+
+  useEffect(() => {
+    timerRef.current = setInterval(next, 5000);
+    return () => clearInterval(timerRef.current);
+  }, [next]);
+
+  const resetTimer = () => {
+    clearInterval(timerRef.current);
+    timerRef.current = setInterval(next, 5000);
+  };
+
+  return (
+    <div data-testid="mfg-carousel" className="relative">
+      {/* Cards row — show all on desktop, one on mobile */}
+      <div className="hidden md:grid grid-cols-4 gap-6">
+        {MFG_USPS.map((item, idx) => {
+          const Icon = item.icon;
+          return (
+            <ScrollReveal key={item.title} delay={idx * 100}>
+              <div className="card-premium p-7 h-full">
+                <div className="w-12 h-12 rounded-xl bg-[#064e3b]/5 flex items-center justify-center mb-5">
+                  <Icon className="w-6 h-6 text-[#064e3b]" />
+                </div>
+                <h3 className="text-base font-semibold text-[#064e3b] mb-2">{item.title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed font-['DM_Sans']">{item.desc}</p>
+              </div>
+            </ScrollReveal>
+          );
+        })}
+      </div>
+
+      {/* Mobile carousel */}
+      <div className="md:hidden">
+        <div className="overflow-hidden">
+          <div className="transition-transform duration-500 ease-out" style={{ transform: `translateX(-${current * 100}%)`, display: "flex" }}>
+            {MFG_USPS.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div key={item.title} className="w-full flex-shrink-0 px-1">
+                  <div className="card-premium p-7">
+                    <div className="w-12 h-12 rounded-xl bg-[#064e3b]/5 flex items-center justify-center mb-5">
+                      <Icon className="w-6 h-6 text-[#064e3b]" />
+                    </div>
+                    <h3 className="text-base font-semibold text-[#064e3b] mb-2">{item.title}</h3>
+                    <p className="text-sm text-gray-500 leading-relaxed font-['DM_Sans']">{item.desc}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div className="flex items-center justify-center gap-3 mt-6">
+          <button onClick={() => { prev(); resetTimer(); }} data-testid="carousel-prev"
+            className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:border-[#064e3b] hover:text-[#064e3b] transition-colors">
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+          <div className="flex items-center gap-2">
+            {MFG_USPS.map((_, idx) => (
+              <button key={idx} onClick={() => { setCurrent(idx); resetTimer(); }}
+                className={`w-2 h-2 rounded-full transition-all ${idx === current ? "bg-[#064e3b] w-6" : "bg-gray-300"}`} />
+            ))}
+          </div>
+          <button onClick={() => { next(); resetTimer(); }} data-testid="carousel-next"
+            className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:border-[#064e3b] hover:text-[#064e3b] transition-colors">
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
   const heroRef = useRef(null);
@@ -254,6 +341,21 @@ export default function Home() {
       </section>
 
       <WaveDivider color="#f9fafb" />
+
+      {/* ===== MANUFACTURING USPs CAROUSEL ===== */}
+      <section data-testid="mfg-usps-section" className="py-20 lg:py-28 relative" style={{ background: "#f9fafb" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <div className="text-center mb-14">
+              <span className="text-xs tracking-[0.2em] uppercase font-bold text-[#d4a017] mb-3 block font-['DM_Sans']">Our Commitment</span>
+              <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-[#064e3b]">
+                What Sets Our Manufacturing Apart
+              </h2>
+            </div>
+          </ScrollReveal>
+          <MfgCarousel />
+        </div>
+      </section>
 
       {/* ===== ABOUT TEASER ===== */}
       <section data-testid="about-teaser" className="py-20 lg:py-28 relative overflow-hidden" style={{ background: "#f9fafb" }}>

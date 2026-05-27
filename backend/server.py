@@ -99,6 +99,29 @@ async def create_blog(data: BlogPostCreate):
     doc.pop("_id", None)
     return post
 
+@api_router.put("/blogs/{blog_id}")
+async def update_blog(blog_id: str, data: BlogPostCreate):
+    update_data = data.model_dump()
+    result = await db.blogs.update_one({"id": blog_id}, {"$set": update_data})
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Blog post not found")
+    updated = await db.blogs.find_one({"id": blog_id}, {"_id": 0})
+    return updated
+
+@api_router.delete("/blogs/{blog_id}")
+async def delete_blog(blog_id: str):
+    result = await db.blogs.delete_one({"id": blog_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Blog post not found")
+    return {"message": "Blog post deleted"}
+
+@api_router.delete("/inquiries/{inquiry_id}")
+async def delete_inquiry(inquiry_id: str):
+    result = await db.inquiries.delete_one({"id": inquiry_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Inquiry not found")
+    return {"message": "Inquiry deleted"}
+
 # --- Seed Blog Data ---
 
 @app.on_event("startup")

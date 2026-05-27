@@ -1,12 +1,41 @@
 import { useParams, Link } from "react-router-dom";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, CheckCircle, Shield, FlaskConical } from "lucide-react";
 import PRODUCT_CATEGORIES from "@/data/productData";
 import ScrollReveal from "@/components/ScrollReveal";
 
+function useProductJsonLd(category) {
+  useEffect(() => {
+    if (!category) return;
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.id = "product-jsonld";
+    script.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": category.title,
+      "description": category.seoDescription,
+      "brand": { "@type": "Brand", "name": "Hilton Pharma Chem" },
+      "manufacturer": {
+        "@type": "Organization",
+        "name": "Hilton Pharma Chem",
+        "address": { "@type": "PostalAddress", "addressLocality": "Sidhpur", "addressRegion": "Gujarat", "addressCountry": "IN" }
+      },
+      "category": "Ayurvedic Pharmaceutical Manufacturing"
+    });
+    document.head.appendChild(script);
+    return () => {
+      const el = document.getElementById("product-jsonld");
+      if (el) el.remove();
+    };
+  }, [category]);
+}
+
 export default function ProductCategory() {
   const { slug } = useParams();
   const category = PRODUCT_CATEGORIES.find((c) => c.slug === slug);
+  useProductJsonLd(category);
 
   if (!category) {
     return (
