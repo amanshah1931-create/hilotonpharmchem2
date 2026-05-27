@@ -7,7 +7,8 @@ Build a professional, SEO-friendly website for Hilton Pharma Chem - a third-part
 - **Frontend**: React + Tailwind CSS + Shadcn UI (port 3000)
 - **Backend**: FastAPI + MongoDB (port 8001)
 - **Database**: MongoDB (inquiries, blogs collections)
-- **Design**: Outfit + Manrope fonts, Deep green/saffron/brown/white color palette
+- **Design**: Playfair Display + DM Sans fonts, Deep emerald (#064e3b) / Gold (#d4a017) / Dark emerald (#022c22) palette
+- **Animations**: ParticleCanvas, TypewriterText, AnimatedCounter, ScrollReveal (IntersectionObserver)
 
 ## User Personas
 1. **Brand Owners** - Looking for third-party manufacturing partner
