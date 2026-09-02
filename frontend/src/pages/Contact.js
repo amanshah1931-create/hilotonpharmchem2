@@ -7,6 +7,7 @@ import { Phone, Mail, MapPin, Loader2, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
 import axios from "axios";
 import ScrollReveal from "@/components/ScrollReveal";
+import SEO from "@/components/SEO";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -33,6 +34,11 @@ export default function Contact() {
 
   return (
     <div data-testid="contact-page">
+      <SEO
+        title="Contact Hilton Pharma Chem | Request an Ayurvedic Manufacturing Quote"
+        description="Get in touch with Hilton Pharma Chem for third-party Ayurvedic and pharmaceutical manufacturing. Plant in Sidhpur, Gujarat; corporate office in Ahmedabad. Call +91-9328119224."
+        path="/contact"
+      />
       <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28" style={{ background: "#022c22" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <span className="text-xs tracking-[0.2em] uppercase font-bold text-[#d4a017] mb-4 block font-['DM_Sans']">Get In Touch</span>

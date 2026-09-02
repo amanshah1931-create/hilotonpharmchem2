@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Calendar, ArrowRight, User, PenLine } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
+import SEO from "@/components/SEO";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -26,6 +27,11 @@ export default function Blog() {
 
   return (
     <div data-testid="blog-page">
+      <SEO
+        title="Blog | Ayurvedic Manufacturing Insights — Hilton Pharma Chem"
+        description="Articles on Ayurvedic formulation, GMP compliance, and third-party manufacturing from Hilton Pharma Chem, a top ayurvedic manufacturer based in Gujarat, India."
+        path="/blog"
+      />
       {/* Page Header */}
       <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 bg-emerald-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
