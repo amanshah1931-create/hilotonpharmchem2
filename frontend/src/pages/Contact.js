@@ -41,11 +41,13 @@ export default function Contact() {
       />
       <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28" style={{ background: "#022c22" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <span className="text-xs tracking-[0.2em] uppercase font-bold text-[#d4a017] mb-4 block font-['DM_Sans']">Get In Touch</span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white">Contact Us</h1>
-          <p className="mt-4 text-lg text-emerald-200/70 max-w-2xl font-['DM_Sans']">
-            Ready to discuss your manufacturing requirements? Fill out the form or reach us directly.
-          </p>
+          <ScrollReveal>
+            <span className="text-xs tracking-[0.2em] uppercase font-bold text-[#d4a017] mb-4 block font-['DM_Sans']">Get In Touch</span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white">Contact Us</h1>
+            <p className="mt-4 text-lg text-emerald-200/70 max-w-2xl font-['DM_Sans']">
+              Ready to discuss your manufacturing requirements? Fill out the form or reach us directly.
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -87,8 +89,8 @@ export default function Contact() {
                 <div className="border-t border-gray-200 pt-8">
                   <div data-testid="map-placeholder" className="w-full h-56 bg-gray-100 rounded-xl border border-gray-200 flex items-center justify-center overflow-hidden">
                     <iframe
-                      title="Hilton Pharma Chem Location"
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.8!2d72.3!3d23.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sSidhpur%2C%20Patan%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1700000000"
+                      title="Hilton Pharma Chem Manufacturing Plant Location - Sidhpur, Gujarat"
+                      src="https://www.google.com/maps?q=Sidhpur,+Patan,+Gujarat,+India&output=embed"
                       width="100%" height="100%" style={{ border: 0 }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"
                       className="rounded-xl"
                     />

@@ -9,7 +9,8 @@ import {
 } from "@/components/ui/select";
 import { ArrowLeft, Bold, Italic, Heading2, Heading3, List, Loader2, Eye, Pencil, ImageIcon } from "lucide-react";
 import { toast } from "sonner";
-import axios from "axios";
+import { adminApi, isAuthed } from "@/lib/adminAuth";
+import AdminGate from "@/components/AdminGate";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -32,6 +33,7 @@ function insertTag(textarea, openTag, closeTag) {
 
 export default function BlogWrite() {
   const navigate = useNavigate();
+  const [authed, setAuthed] = useState(isAuthed());
   const [formData, setFormData] = useState({
     title: "",
     slug: "",
@@ -82,18 +84,24 @@ export default function BlogWrite() {
         ...formData,
         slug: formData.slug || slugify(formData.title),
       };
-      await axios.post(`${API}/blogs`, payload);
+      await adminApi.post(`/blogs`, payload);
       toast.success("Blog post published successfully!");
       navigate("/blog");
     } catch (err) {
       console.error("Failed to publish blog:", err);
-      toast.error("Failed to publish. Please try again.");
+      if (err.response && err.response.status === 401) {
+        toast.error("Your session expired. Please log in again.");
+        setAuthed(false);
+      } else {
+        toast.error("Failed to publish. Please try again.");
+      }
     } finally {
       setSubmitting(false);
     }
   };
 
   return (
+    <AdminGate authed={authed} onAuthed={() => setAuthed(true)}>
     <div data-testid="blog-write-page">
       {/* Header */}
       <section className="pt-32 pb-8 lg:pt-40 lg:pb-12 bg-white border-b border-stone-200">
@@ -306,5 +314,6 @@ export default function BlogWrite() {
         </div>
       </section>
     </div>
+    </AdminGate>
   );
 }

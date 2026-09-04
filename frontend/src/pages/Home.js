@@ -12,7 +12,7 @@ import TypewriterText from "@/components/TypewriterText";
 import ParticleCanvas from "@/components/ParticleCanvas";
 import SEO from "@/components/SEO";
 
-const HERO_BG = "/images/facility/filling-line.jpg";
+const HERO_BG = "/images/facility/mixing-tanks.jpg";
 const ABOUT_IMG = "/images/facility/sachet-packing.jpg";
 const GALLERY_IMAGES = [
   { src: "/images/facility/filling-line.jpg", label: "PET Bottle Filling Line" },
@@ -173,7 +173,7 @@ export default function Home() {
         <div className="absolute top-20 right-10 w-80 h-80 bg-[#d4a017]/10 rounded-full blur-3xl" />
         <div className="absolute bottom-10 left-10 w-96 h-96 bg-[#064e3b]/15 rounded-full blur-3xl" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 w-full">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 w-full flex-none">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 mb-6 animate-fade-in-up">
               <span className="w-2 h-2 rounded-full bg-[#d4a017] animate-pulse" />
@@ -181,10 +181,14 @@ export default function Home() {
                 Third-Party Ayurvedic Manufacturing
               </span>
             </div>
-            {/* Static, always-crawlable H1 carrying the primary keyword — search engines and
-                screen readers see this reliably, unlike JS-animated text alone. */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white leading-[1.1] animate-fade-in-up animate-delay-100">
-              Hilton Pharma Chem —<br className="hidden sm:block" /> Top Ayurvedic Manufacturer in Gujarat
+            {/* Static, always-crawlable heading — search engines and screen readers see this
+                reliably, unlike JS-animated text alone. Split into a brand line + a short H1
+                so it never wraps past 2 lines and collides with the floating stat badges. */}
+            <p className="text-xl sm:text-2xl font-semibold text-white/90 animate-fade-in-up animate-delay-100">
+              Hilton Pharma Chem
+            </p>
+            <h1 className="mt-1 text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white leading-[1.1] animate-fade-in-up animate-delay-100">
+              Top Ayurvedic Manufacturer in Gujarat
             </h1>
             <div className="mt-3 text-xl sm:text-2xl font-medium text-[#e8b84b] animate-fade-in-up animate-delay-100">
               <TypewriterText />

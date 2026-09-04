@@ -5,7 +5,7 @@ import SEO from "@/components/SEO";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const FACILITY_IMG = "/images/facility/mixing-tanks.jpg";
-const HERO_BG = "/images/facility/capping-line.jpg";
+const HERO_BG = "/images/facility/sachet-packing.jpg";
 
 const VALUES = [
   {
