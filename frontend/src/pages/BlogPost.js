@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Calendar, User } from "lucide-react";
 import axios from "axios";
+import DOMPurify from "dompurify";
 import SEO from "@/components/SEO";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
@@ -122,7 +123,7 @@ export default function BlogPost() {
       <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         <div
           className="blog-content"
-          dangerouslySetInnerHTML={{ __html: post.content }}
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
         />
       </article>
 
