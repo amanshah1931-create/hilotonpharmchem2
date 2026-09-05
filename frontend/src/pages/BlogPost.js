@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Calendar, User } from "lucide-react";
 import axios from "axios";
+import DOMPurify from "dompurify";
+import SEO from "@/components/SEO";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -61,6 +63,12 @@ export default function BlogPost() {
 
   return (
     <div data-testid="blog-post-page">
+      <SEO
+        title={`${post.title} | Hilton Pharma Chem`}
+        description={post.excerpt || post.summary || `${post.title} — insights from Hilton Pharma Chem, a GMP & ISO certified Ayurvedic third-party manufacturer in Gujarat, India.`}
+        path={`/blog/${slug}`}
+        image={post.image_url}
+      />
       {/* Header */}
       <section className="pt-32 pb-12 lg:pt-40 lg:pb-16 bg-white border-b border-stone-200">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -115,7 +123,7 @@ export default function BlogPost() {
       <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
         <div
           className="blog-content"
-          dangerouslySetInnerHTML={{ __html: post.content }}
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
         />
       </article>
 

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /blog/write
+
+Sitemap: https://hiltonpharmachem.com/sitemap.xml

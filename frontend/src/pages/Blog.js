@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Calendar, ArrowRight, User, PenLine } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Calendar, ArrowRight, User } from "lucide-react";
 import axios from "axios";
+import SEO from "@/components/SEO";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -26,10 +27,15 @@ export default function Blog() {
 
   return (
     <div data-testid="blog-page">
+      <SEO
+        title="Blog | Ayurvedic Manufacturing Insights — Hilton Pharma Chem"
+        description="Articles on Ayurvedic formulation, GMP compliance, and third-party manufacturing from Hilton Pharma Chem, a top ayurvedic manufacturer based in Gujarat, India."
+        path="/blog"
+      />
       {/* Page Header */}
       <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 bg-emerald-950">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
-          <div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
             <span className="text-xs tracking-[0.2em] uppercase font-bold text-[#d4a017] mb-4 block font-['DM_Sans']">
               Insights & Knowledge
             </span>
@@ -43,16 +49,7 @@ export default function Blog() {
               Industry insights, manufacturing best practices, and knowledge resources for
               Ayurvedic and pharmaceutical brands.
             </p>
-          </div>
-          <Link to="/blog/write">
-            <button
-              data-testid="write-blog-btn"
-              className="btn-gold text-sm flex-shrink-0"
-            >
-              <PenLine className="w-4 h-4" />
-              Write a Post
-            </button>
-          </Link>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -80,11 +77,11 @@ export default function Blog() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {posts.map((post, idx) => (
+                <ScrollReveal key={post.id} delay={idx < 2 ? idx * 100 : 0}>
                 <Link
-                  key={post.id}
                   to={`/blog/${post.slug}`}
                   data-testid={`blog-card-${post.slug}`}
-                  className={`group bg-white rounded-xl overflow-hidden border border-stone-200 card-hover ${
+                  className={`group bg-white rounded-xl overflow-hidden border border-stone-200 card-hover block ${
                     idx === 0 ? "md:col-span-2" : ""
                   }`}
                 >
@@ -134,6 +131,7 @@ export default function Blog() {
                     </div>
                   </div>
                 </Link>
+                </ScrollReveal>
               ))}
             </div>
           )}

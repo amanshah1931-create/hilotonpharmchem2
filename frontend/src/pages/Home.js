@@ -10,9 +10,16 @@ import ScrollReveal from "@/components/ScrollReveal";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import TypewriterText from "@/components/TypewriterText";
 import ParticleCanvas from "@/components/ParticleCanvas";
+import SEO from "@/components/SEO";
 
-const HERO_BG = "https://images.unsplash.com/photo-1754372069872-3fef8a815c87?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2OTV8MHwxfHNlYXJjaHwzfHxtb2Rlcm4lMjBwaGFybWFjZXV0aWNhbCUyMG1hbnVmYWN0dXJpbmd8ZW58MHx8fHwxNzc1MDUyODU5fDA&ixlib=rb-4.1.0&q=85";
-const ABOUT_IMG = "https://images.unsplash.com/photo-1745420052527-a75fcc6aba58?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2OTV8MHwxfHNlYXJjaHw0fHxtb2Rlcm4lMjBwaGFybWFjZXV0aWNhbCUyMG1hbnVmYWN0dXJpbmd8ZW58MHx8fHwxNzc1MDUyODU5fDA&ixlib=rb-4.1.0&q=85";
+const HERO_BG = "/images/facility/mixing-tanks.jpg";
+const ABOUT_IMG = "/images/facility/sachet-packing.jpg";
+const GALLERY_IMAGES = [
+  { src: "/images/facility/filling-line.jpg", label: "PET Bottle Filling Line" },
+  { src: "/images/facility/capping-line.jpg", label: "Automatic Capping Station" },
+  { src: "/images/facility/mixing-tanks.jpg", label: "Jacketed Mixing Vessels" },
+  { src: "/images/facility/sachet-packing.jpg", label: "Sachet & Strip Packing" },
+];
 
 const CATEGORIES = [
   { title: "Ointments & Creams", slug: "ointments-creams-gels", desc: "Pain relief ointments, therapeutic creams, medicated gels, and oral care products.", image: "https://images.pexels.com/photos/4021768/pexels-photo-4021768.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" },
@@ -151,17 +158,22 @@ export default function Home() {
 
   return (
     <div data-testid="home-page">
+      <SEO
+        title="Hilton Pharma Chem | Top Ayurvedic Third-Party Manufacturer in Gujarat, India"
+        description="Hilton Pharma Chem is a GMP & ISO certified third-party Ayurvedic manufacturer in Sidhpur, Gujarat, serving brand partners across India and Ahmedabad with 25+ years of formulation expertise."
+        path="/"
+      />
       {/* ===== HERO ===== */}
       <section data-testid="hero-section" className="relative min-h-[92vh] flex items-center overflow-hidden">
         <div className="absolute inset-0" ref={heroRef}>
-          <img src={HERO_BG} alt="Pharmaceutical manufacturing" className="w-full h-[120%] object-cover" />
+          <img src={HERO_BG} alt="Hilton Pharma Chem GMP certified Ayurvedic manufacturing facility in Gujarat" className="w-full h-[120%] object-cover" />
         </div>
         <div className="hero-overlay absolute inset-0" />
         <ParticleCanvas />
         <div className="absolute top-20 right-10 w-80 h-80 bg-[#d4a017]/10 rounded-full blur-3xl" />
         <div className="absolute bottom-10 left-10 w-96 h-96 bg-[#064e3b]/15 rounded-full blur-3xl" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 w-full">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 w-full flex-none">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 mb-6 animate-fade-in-up">
               <span className="w-2 h-2 rounded-full bg-[#d4a017] animate-pulse" />
@@ -169,9 +181,18 @@ export default function Home() {
                 Third-Party Ayurvedic Manufacturing
               </span>
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white leading-[1.1] animate-fade-in-up animate-delay-100">
-              <TypewriterText />
+            {/* Static, always-crawlable heading — search engines and screen readers see this
+                reliably, unlike JS-animated text alone. Split into a brand line + a short H1
+                so it never wraps past 2 lines and collides with the floating stat badges. */}
+            <p className="text-xl sm:text-2xl font-semibold text-white/90 animate-fade-in-up animate-delay-100">
+              Hilton Pharma Chem
+            </p>
+            <h1 className="mt-1 text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white leading-[1.1] animate-fade-in-up animate-delay-100">
+              Top Ayurvedic Manufacturer in Gujarat
             </h1>
+            <div className="mt-3 text-xl sm:text-2xl font-medium text-[#e8b84b] animate-fade-in-up animate-delay-100">
+              <TypewriterText />
+            </div>
             <p className="mt-6 text-lg text-emerald-100/80 leading-relaxed max-w-xl animate-fade-in-up animate-delay-200 font-['DM_Sans']">
               GMP & ISO certified pharmaceutical manufacturing with 25+ years of formulation expertise.
               From concept to market, we deliver consistent quality for domestic and international brands.
@@ -388,7 +409,7 @@ export default function Home() {
             <ScrollReveal delay={200}>
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-br from-[#064e3b]/10 to-[#d4a017]/10 rounded-3xl -rotate-2 hidden lg:block" />
-                <img src={ABOUT_IMG} alt="Hilton Pharma Chem manufacturing" className="relative w-full rounded-2xl shadow-xl" />
+                <img src={ABOUT_IMG} alt="Sachet and strip packing machine at Hilton Pharma Chem's GMP certified facility" className="relative w-full rounded-2xl shadow-xl" />
                 <div className="absolute -bottom-6 -left-6 bg-[#064e3b] text-white p-5 rounded-2xl shadow-xl hidden lg:flex flex-col items-center">
                   <div className="text-3xl font-bold">25+</div>
                   <div className="text-[11px] text-[#e8b84b] font-semibold font-['DM_Sans']">Years of Legacy</div>
@@ -399,6 +420,39 @@ export default function Home() {
                 </div>
               </div>
             </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== FACILITY GALLERY ===== */}
+      <section data-testid="facility-gallery" className="py-20 lg:py-28 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal>
+            <div className="text-center mb-14">
+              <span className="text-xs tracking-[0.2em] uppercase font-bold text-[#d4a017] mb-3 block font-['DM_Sans']">Behind the Scenes</span>
+              <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-[#064e3b]">Inside Our Manufacturing Facility</h2>
+              <p className="mt-4 text-base text-gray-500 max-w-2xl mx-auto font-['DM_Sans']">
+                A real look at the machinery producing your formulations — from mixing to filling to final packing.
+              </p>
+            </div>
+          </ScrollReveal>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+            {GALLERY_IMAGES.map((img, idx) => (
+              <ScrollReveal key={img.label} delay={idx * 100}>
+                <div className="group relative aspect-[3/4] rounded-2xl overflow-hidden shadow-md" data-testid={`gallery-item-${idx}`}>
+                  <img
+                    src={img.src}
+                    alt={`${img.label} at Hilton Pharma Chem GMP certified facility`}
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-70 group-hover:opacity-90 transition-opacity" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <p className="text-white text-sm font-semibold leading-tight">{img.label}</p>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
           </div>
         </div>
       </section>

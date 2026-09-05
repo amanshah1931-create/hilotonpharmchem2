@@ -70,7 +70,7 @@ export default function Navbar() {
         </div>
       </div>
       {mobileOpen && (
-        <div data-testid="mobile-menu" className="lg:hidden bg-white/95 backdrop-blur-xl border-t border-gray-200 shadow-lg">
+        <div data-testid="mobile-menu" className="lg:hidden bg-white/95 backdrop-blur-xl border-t border-gray-200 shadow-lg animate-fade-in-up" style={{ animationDuration: "0.25s" }}>
           <div className="px-4 py-4 space-y-1">
             {navLinks.map((link) => (
               <Link

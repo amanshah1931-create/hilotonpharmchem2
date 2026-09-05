@@ -1,14 +1,17 @@
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, HTTPException, Depends, Header
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
+import hmac
+import secrets
 from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict
 from typing import List, Optional
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
+import jwt
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -19,6 +22,37 @@ db = client[os.environ['DB_NAME']]
 
 app = FastAPI()
 api_router = APIRouter(prefix="/api")
+
+# --- Auth config ---
+# ADMIN_PASSWORD and JWT_SECRET must be set in backend/.env (never committed).
+# If ADMIN_PASSWORD is unset, admin login is disabled entirely (fails closed, not open).
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
+JWT_SECRET = os.environ.get("JWT_SECRET") or secrets.token_urlsafe(32)
+JWT_ALGO = "HS256"
+JWT_EXPIRY_HOURS = 12
+
+class LoginRequest(BaseModel):
+    password: str
+
+def create_token() -> str:
+    payload = {
+        "sub": "admin",
+        "exp": datetime.now(timezone.utc) + timedelta(hours=JWT_EXPIRY_HOURS),
+        "iat": datetime.now(timezone.utc),
+    }
+    return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGO)
+
+async def require_admin(authorization: Optional[str] = Header(default=None)):
+    if not authorization or not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Missing or invalid Authorization header")
+    token = authorization.split(" ", 1)[1]
+    try:
+        jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGO])
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=401, detail="Session expired, please log in again")
+    except jwt.InvalidTokenError:
+        raise HTTPException(status_code=401, detail="Invalid session token")
+    return True
 
 # --- Models ---
 
@@ -62,6 +96,16 @@ class BlogPostCreate(BaseModel):
     image_url: str = ""
     author: str = "Hilton Pharma Chem"
 
+# --- Admin Auth Endpoint ---
+
+@api_router.post("/admin/login")
+async def admin_login(data: LoginRequest):
+    if not ADMIN_PASSWORD:
+        raise HTTPException(status_code=503, detail="Admin login is not configured on this server")
+    if not hmac.compare_digest(data.password, ADMIN_PASSWORD):
+        raise HTTPException(status_code=401, detail="Incorrect password")
+    return {"token": create_token(), "expires_in_hours": JWT_EXPIRY_HOURS}
+
 # --- Inquiry Endpoints ---
 
 @api_router.post("/inquiries", response_model=Inquiry)
@@ -73,7 +117,7 @@ async def create_inquiry(data: InquiryCreate):
     return inquiry
 
 @api_router.get("/inquiries", response_model=List[Inquiry])
-async def get_inquiries():
+async def get_inquiries(_: bool = Depends(require_admin)):
     results = await db.inquiries.find({}, {"_id": 0}).to_list(1000)
     return results
 
@@ -92,7 +136,7 @@ async def get_blog_by_slug(slug: str):
     return post
 
 @api_router.post("/blogs", response_model=BlogPost)
-async def create_blog(data: BlogPostCreate):
+async def create_blog(data: BlogPostCreate, _: bool = Depends(require_admin)):
     post = BlogPost(**data.model_dump())
     doc = post.model_dump()
     await db.blogs.insert_one(doc)
@@ -100,7 +144,7 @@ async def create_blog(data: BlogPostCreate):
     return post
 
 @api_router.put("/blogs/{blog_id}")
-async def update_blog(blog_id: str, data: BlogPostCreate):
+async def update_blog(blog_id: str, data: BlogPostCreate, _: bool = Depends(require_admin)):
     update_data = data.model_dump()
     result = await db.blogs.update_one({"id": blog_id}, {"$set": update_data})
     if result.matched_count == 0:
@@ -109,14 +153,14 @@ async def update_blog(blog_id: str, data: BlogPostCreate):
     return updated
 
 @api_router.delete("/blogs/{blog_id}")
-async def delete_blog(blog_id: str):
+async def delete_blog(blog_id: str, _: bool = Depends(require_admin)):
     result = await db.blogs.delete_one({"id": blog_id})
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Blog post not found")
     return {"message": "Blog post deleted"}
 
 @api_router.delete("/inquiries/{inquiry_id}")
-async def delete_inquiry(inquiry_id: str):
+async def delete_inquiry(inquiry_id: str, _: bool = Depends(require_admin)):
     result = await db.inquiries.delete_one({"id": inquiry_id})
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Inquiry not found")
@@ -221,7 +265,10 @@ app.include_router(api_router)
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
-    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
+    allow_origins=os.environ.get(
+        'CORS_ORIGINS',
+        'https://hiltonpharmachem.com,https://www.hiltonpharmachem.com'
+    ).split(','),
     allow_methods=["*"],
     allow_headers=["*"],
 )

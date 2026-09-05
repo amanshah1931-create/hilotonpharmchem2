@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Trash2, PenLine, Eye, Mail, Phone, Building2, Package, Calendar, Loader2, LayoutDashboard, FileText, Inbox } from "lucide-react";
 import { toast } from "sonner";
 import axios from "axios";
+import { adminApi, isAuthed, logout } from "@/lib/adminAuth";
+import AdminGate from "@/components/AdminGate";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -29,27 +31,33 @@ function AdminTabs({ active, onChange }) {
   );
 }
 
-function InquiriesPanel() {
+function InquiriesPanel({ onAuthExpired }) {
   const [inquiries, setInquiries] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchInquiries = async () => {
     try {
-      const res = await axios.get(`${API}/inquiries`);
+      const res = await adminApi.get(`/inquiries`);
       setInquiries(res.data);
-    } catch (err) { console.error(err); }
+    } catch (err) {
+      console.error(err);
+      if (err.response && err.response.status === 401) onAuthExpired();
+    }
     finally { setLoading(false); }
   };
 
-  useEffect(() => { fetchInquiries(); }, []);
+  useEffect(() => { fetchInquiries(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this inquiry?")) return;
     try {
-      await axios.delete(`${API}/inquiries/${id}`);
+      await adminApi.delete(`/inquiries/${id}`);
       setInquiries((prev) => prev.filter((i) => i.id !== id));
       toast.success("Inquiry deleted");
-    } catch (err) { toast.error("Failed to delete"); }
+    } catch (err) {
+      if (err.response && err.response.status === 401) onAuthExpired();
+      else toast.error("Failed to delete");
+    }
   };
 
   if (loading) return <div className="flex items-center justify-center py-20"><Loader2 className="w-6 h-6 animate-spin text-gray-400" /></div>;
@@ -96,7 +104,7 @@ function InquiriesPanel() {
   );
 }
 
-function BlogsPanel() {
+function BlogsPanel({ onAuthExpired }) {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -113,10 +121,13 @@ function BlogsPanel() {
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this blog post?")) return;
     try {
-      await axios.delete(`${API}/blogs/${id}`);
+      await adminApi.delete(`/blogs/${id}`);
       setPosts((prev) => prev.filter((p) => p.id !== id));
       toast.success("Blog post deleted");
-    } catch (err) { toast.error("Failed to delete"); }
+    } catch (err) {
+      if (err.response && err.response.status === 401) onAuthExpired();
+      else toast.error("Failed to delete");
+    }
   };
 
   if (loading) return <div className="flex items-center justify-center py-20"><Loader2 className="w-6 h-6 animate-spin text-gray-400" /></div>;
@@ -170,25 +181,42 @@ function BlogsPanel() {
 
 export default function Admin() {
   const [tab, setTab] = useState("inquiries");
+  const [authed, setAuthed] = useState(isAuthed());
+
+  const handleAuthExpired = () => {
+    toast.error("Your session expired. Please log in again.");
+    setAuthed(false);
+  };
 
   return (
+    <AdminGate authed={authed} onAuthed={() => setAuthed(true)}>
     <div data-testid="admin-page">
       <section className="pt-32 pb-8 lg:pt-40 lg:pb-12 bg-white border-b border-gray-200">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3 mb-2">
-            <LayoutDashboard className="w-6 h-6 text-[#064e3b]" />
-            <h1 className="text-2xl md:text-3xl font-semibold text-[#064e3b]">Admin Dashboard</h1>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+          <div>
+            <div className="flex items-center gap-3 mb-2">
+              <LayoutDashboard className="w-6 h-6 text-[#064e3b]" />
+              <h1 className="text-2xl md:text-3xl font-semibold text-[#064e3b]">Admin Dashboard</h1>
+            </div>
+            <p className="text-sm text-gray-500 font-['DM_Sans']">Manage inquiries, blog posts, and site content.</p>
           </div>
-          <p className="text-sm text-gray-500 font-['DM_Sans']">Manage inquiries, blog posts, and site content.</p>
+          <button
+            onClick={() => { logout(); setAuthed(false); }}
+            data-testid="admin-logout-btn"
+            className="text-sm text-gray-500 hover:text-[#064e3b] font-medium transition-colors"
+          >
+            Log Out
+          </button>
         </div>
       </section>
       <section className="py-8 lg:py-12" style={{ background: "#f9fafb" }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <AdminTabs active={tab} onChange={setTab} />
-          {tab === "inquiries" && <InquiriesPanel />}
-          {tab === "blogs" && <BlogsPanel />}
+          {tab === "inquiries" && <InquiriesPanel onAuthExpired={handleAuthExpired} />}
+          {tab === "blogs" && <BlogsPanel onAuthExpired={handleAuthExpired} />}
         </div>
       </section>
     </div>
+    </AdminGate>
   );
 }

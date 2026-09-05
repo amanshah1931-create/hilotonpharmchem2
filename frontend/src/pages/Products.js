@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Star } from "lucide-react";
 import PRODUCT_CATEGORIES from "@/data/productData";
 import ScrollReveal from "@/components/ScrollReveal";
+import SEO from "@/components/SEO";
 
-const HERO_BG = "https://images.unsplash.com/photo-1754372069872-3fef8a815c87?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2OTV8MHwxfHNlYXJjaHwzfHxtb2Rlcm4lMjBwaGFybWFjZXV0aWNhbCUyMG1hbnVmYWN0dXJpbmd8ZW58MHx8fHwxNzc1MDUyODU5fDA&ixlib=rb-4.1.0&q=85";
+const HERO_BG = "/images/facility/mixing-tanks.jpg";
 const FEATURED_SLUGS = ["ointments-creams-gels", "tablets-capsules"];
 
-const FILTER_TABS = [
+const FILTER_TAB_DEFS = [
   { label: "All", value: "all" },
   { label: "Ointments", value: "ointments-creams-gels" },
   { label: "Syrups", value: "syrups-liquids" },
@@ -17,15 +18,28 @@ const FILTER_TABS = [
   { label: "Winter", value: "winter-seasonal" },
 ];
 
+const totalProducts = PRODUCT_CATEGORIES.reduce((sum, c) => sum + c.products.length, 0);
+const FILTER_TABS = FILTER_TAB_DEFS.map((tab) => {
+  if (tab.value === "all") return { ...tab, count: totalProducts };
+  const cat = PRODUCT_CATEGORIES.find((c) => c.slug === tab.value);
+  return { ...tab, count: cat ? cat.products.length : 0 };
+});
+
 export default function Products() {
   const [filter, setFilter] = useState("all");
   const filtered = filter === "all" ? PRODUCT_CATEGORIES : PRODUCT_CATEGORIES.filter((c) => c.slug === filter);
 
   return (
     <div data-testid="products-page">
+      <SEO
+        title="Ayurvedic Product Manufacturing Range | Hilton Pharma Chem"
+        description="Explore Hilton Pharma Chem's third-party manufacturing range: ayurvedic tablets, capsules, syrups, oils, ointments, creams, gels, and herbal powders — GMP & ISO certified, made in Gujarat, India."
+        path="/products"
+        keywords="ayurvedic tablets manufacturer, ayurvedic capsules manufacturer, ayurvedic syrup manufacturer, ayurvedic oil manufacturer Gujarat"
+      />
       <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-28">
         <div className="absolute inset-0">
-          <img src={HERO_BG} alt="" className="w-full h-full object-cover" />
+          <img src={HERO_BG} alt="Mixing vessels at Hilton Pharma Chem's GMP certified Ayurvedic manufacturing facility" className="w-full h-full object-cover" />
           <div className="absolute inset-0" style={{ background: "rgba(2,44,34,0.85)" }} />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,13 +60,16 @@ export default function Products() {
                 key={tab.value}
                 data-testid={`filter-tab-${tab.value}`}
                 onClick={() => setFilter(tab.value)}
-                className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all font-['DM_Sans'] ${
+                className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all font-['DM_Sans'] ${
                   filter === tab.value
                     ? "bg-[#064e3b] text-white shadow-sm"
                     : "text-gray-500 hover:text-[#064e3b] hover:bg-gray-100"
                 }`}
               >
                 {tab.label}
+                <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${filter === tab.value ? "bg-white/20" : "bg-gray-200"}`}>
+                  {tab.count}
+                </span>
               </button>
             ))}
           </div>
@@ -68,11 +85,11 @@ export default function Products() {
               <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-[#064e3b]">Our Complete Product Portfolio</h2>
             </div>
           </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filtered.map((cat) => (
-              <ScrollReveal key={cat.slug}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" key={filter}>
+            {filtered.map((cat, idx) => (
+              <ScrollReveal key={cat.slug} delay={idx * 60}>
                 <Link to={`/products/${cat.slug}`} data-testid={`category-card-${cat.slug}`}
-                  className="group card-premium block overflow-hidden relative">
+                  className="group card-premium block overflow-hidden relative h-full">
                   <div className="aspect-[16/10] overflow-hidden relative">
                     <img src={cat.image} alt={cat.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
@@ -130,17 +147,19 @@ export default function Products() {
       {/* CTA */}
       <section className="py-20 lg:py-24 relative grain-overlay" style={{ background: "#022c22" }}>
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-white">Looking for a Reliable Manufacturing Partner?</h2>
-          <p className="mt-4 text-base text-emerald-200/70 max-w-2xl mx-auto font-['DM_Sans']">
-            Share your product requirements and let us develop a customized manufacturing solution.
-          </p>
-          <div className="mt-10">
-            <Link to="/contact">
-              <button data-testid="products-cta-btn" className="btn-gold text-base">
-                Discuss Your Requirements <ArrowRight className="w-4 h-4" />
-              </button>
-            </Link>
-          </div>
+          <ScrollReveal>
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-white">Looking for a Reliable Manufacturing Partner?</h2>
+            <p className="mt-4 text-base text-emerald-200/70 max-w-2xl mx-auto font-['DM_Sans']">
+              Share your product requirements and let us develop a customized manufacturing solution.
+            </p>
+            <div className="mt-10">
+              <Link to="/contact">
+                <button data-testid="products-cta-btn" className="btn-gold text-base">
+                  Discuss Your Requirements <ArrowRight className="w-4 h-4" />
+                </button>
+              </Link>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
     </div>

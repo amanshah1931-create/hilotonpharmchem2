@@ -152,9 +152,6 @@
 }
 
 /* --- LOGO --- */
-.logo-brand-green {
-  filter: hue-rotate(42deg) saturate(0.85) brightness(0.95);
-}
 .logo-brand-white {
   filter: grayscale(1) brightness(5) contrast(2);
 }
